@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   
 
+  resources :products
   resources :cars
   resources :cars
   resources :car_models
