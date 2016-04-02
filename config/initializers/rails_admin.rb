@@ -1,7 +1,7 @@
 RailsAdmin.config do |config|
 
   ### Popular gems integration
-  config.assets.initialize_on_precompile = false
+
   ## == Devise ==
   config.authenticate_with do
      warden.authenticate! scope: :user
