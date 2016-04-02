@@ -1,0 +1,32 @@
+<div class="col-md-6">
+<%= simple_form_for @cars_todo_list, html: { multipart: true} do |f| %>
+  <% if @cars_todo_list.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+   <h2>Cars to Service <unsuccessful></unsuccessful>, 
+     there is/are <%= pluralize(@cars_todo_list.errors.count, "error") %>.</h2>
+     prevented this from saving
+
+       <% @cars_todo_list.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+        <% end %>
+    </div>
+    </div>
+<% end %> 
+
+<div class="form-group">
+
+
+<%= f.input :car_plate_number, required: true %>
+
+<%= f.input :car_owner_email, required: true %>
+
+
+
+
+<%= f.button :submit, class: 'btn btn-primary' %>
+
+<%= link_to 'Back', cars_todo_lists_path, class: 'btn btn-default' %>
+<% end %>
+</div>
+</div>

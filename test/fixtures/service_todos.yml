@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  cars_todo_list_id: 
+  completed_at: 2016-04-02 13:09:28
+  started_at: 2016-04-02 13:09:28
+  paid_at: 2016-04-02 13:09:28
+
+two:
+  content: MyString
+  cars_todo_list_id: 
+  completed_at: 2016-04-02 13:09:28
+  started_at: 2016-04-02 13:09:28
+  paid_at: 2016-04-02 13:09:28

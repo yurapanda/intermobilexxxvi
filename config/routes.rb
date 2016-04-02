@@ -2,9 +2,32 @@ Rails.application.routes.draw do
 
   
 
+  
+  resources :cars_todo_lists do 
+    resources :service_todos do
+      member do
+          patch :completed
+          patch :on_going
+          patch :paid
+      end
+    end
+  end
+  resources :cars_todo_lists do 
+    member do
+      patch :ready_for_pickup
+      patch :picked_up
+    end
+  end
+
+  resources :cars_todo_lists do
+    resources :comments
+  end
+  
   resources :products
+  
   resources :cars
-  resources :cars
+  
+  
   resources :car_models
   resources :services
   devise_for :users

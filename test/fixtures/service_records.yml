@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car_id: 
+  finished_at: 2016-04-02 11:42:44
+
+two:
+  car_id: 
+  finished_at: 2016-04-02 11:42:44

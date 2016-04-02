@@ -1,0 +1,17 @@
+
+<% if  current_user.admin? || current_user.technician %>
+	<%= form_for([@cars_todo_list, @cars_todo_list.service_todos.build]) do |f| %>
+		<% if @cars_todo_list.ready_for_pickup? %>
+
+		<% else %>
+		<%= f.text_field :content, placeholder: "New Service" %>
+		<%= f.text_field :price, placeholder: "Price" %>
+		<%= f.submit %>
+		<% end %>
+	<% end %>
+<% end %>
+
+
+
+
+	

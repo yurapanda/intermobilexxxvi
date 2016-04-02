@@ -1,0 +1,69 @@
+
+<div class="well">
+<p id="notice"><%= notice %></p>
+<% if  current_user.admin? || current_user.technician %>
+
+        <% if @cars_todo_list.ready_for_pickup? %>
+            <%= link_to "Marked as Ready For Pickup", ready_for_pickup_cars_todo_list_path(@cars_todo_list.id), method: :patch, data: {confirm: "Are you Sure you want to mark car ready for pickup??"},class: "btn btn-primary disabled" %>
+        <% else %>
+            <%= link_to "Mark as Ready For Pickup", ready_for_pickup_cars_todo_list_path(@cars_todo_list.id), method: :patch, data: {confirm: "Are you Sure you want to mark car ready for pickup??"},class: "btn btn-primary" %>
+        <%end %>
+        <% if @cars_todo_list.pickedup? %>
+           <%= link_to "Marked as Picked Up", picked_up_cars_todo_list_path(@cars_todo_list.id), method: :patch, data: {confirm: "Are you Sure you want to mark car ready for pickup??"},class: "btn btn-primary disabled" %>
+        <% else %>
+           <%= link_to "Mark as Picked Up", picked_up_cars_todo_list_path(@cars_todo_list.id), method: :patch, data: {confirm: "Are you Sure you want to mark car ready for pickup??"},class: "btn btn-primary" %>
+        <% end %>
+<% end %>
+<% if current_user.email==@cars_todo_list.car_owner_email ||  current_user.admin? || current_user.technician? %>
+<h2><strong>Plate Number:</strong>
+  <%= @cars_todo_list.car_plate_number %>
+</h2>
+ 
+
+
+<strong>Service ID:</strong>
+  <%= @cars_todo_list.id %>
+</p>
+<p>
+  <strong>Car Owner's Email:</strong>
+  <%= @cars_todo_list.car_owner_email %>
+</p>
+<p>
+   <% if @cars_todo_list.pickedup? %>
+              <td><em><font color="gray">Car has been Picked-up at <%= @cars_todo_list.pickedup_at.strftime("%I:%M %p %B-%d-%Y") %> </font></em></td>
+         
+  <% end %>
+</p>
+<div id="cars_todo_list_wrapper">
+	<%= render @cars_todo_list.service_todos %>
+	<div id="form">
+		<%= render "service_todos/form" %>
+	</div>
+</div>
+<p>
+
+</p>
+</div>
+  <div class="well">
+     <div id="comment">
+        <strong><%= pluralize(@cars_todo_list.comments.count, "Comment") %>:</strong><hr>
+        <% @comments.each do |comment| %>
+          <div class="comment">
+            <% if  current_user.admin? || current_user.technician? %>
+                <p style="size:3px; color:#98173E"><strong>Admin</strong> commented:</p>
+                <p style="size:3px; color:#98173E"><%= comment.content %>.<br> <font size="1"><em><%= time_ago_in_words(comment.created_at)%> ago</em></font> <br>  </p><hr>
+
+            <%else %>
+              <p style="size:3px"><strong><%= comment.user.first_name %></strong> commented:</p>
+              <p><%= comment.content %>.<br> <font size="1"><em><%= time_ago_in_words(comment.created_at)%> ago</em></font> <br>  </p><hr>
+            <% end %>
+        <%end %>
+        <%= render 'comments/form' %>
+     </div>
+  </div>
+<% if  current_user.admin? || current_user.technician? %>
+<%= link_to 'Edit', edit_cars_todo_list_path(@cars_todo_list), class: "btn btn-default" %> 
+  <%= link_to "Delete", cars_todo_list_path, class: "btn btn-default", method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
+
+<% end %>

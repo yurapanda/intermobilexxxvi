@@ -2,10 +2,12 @@
 
 one:
   name: MyString
-  description: MyText
   price: 9.99
+  availability: false
+  description: MyText
 
 two:
   name: MyString
-  description: MyText
   price: 9.99
+  availability: false
+  description: MyText

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402003055) do
+ActiveRecord::Schema.define(version: 20160402053855) do
 
   create_table "car_brands", force: :cascade do |t|
     t.string   "name"
@@ -41,13 +41,47 @@ ActiveRecord::Schema.define(version: 20160402003055) do
   add_index "cars", ["car_model_id"], name: "index_cars_on_car_model_id"
   add_index "cars", ["user_id"], name: "index_cars_on_user_id"
 
+  create_table "cars_todo_lists", force: :cascade do |t|
+    t.string   "car_plate_number"
+    t.string   "car_owner_email"
+    t.datetime "pickedup_at"
+    t.datetime "ready_for_pickup_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "cars_todo_list_id"
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "comments", ["cars_todo_list_id"], name: "index_comments_on_cars_todo_list_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.text     "description"
     t.decimal  "price"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "availability"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
+
+  create_table "service_todos", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "cars_todo_list_id"
+    t.datetime "completed_at"
+    t.datetime "started_at"
+    t.datetime "paid_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.decimal  "price"
+  end
+
+  add_index "service_todos", ["cars_todo_list_id"], name: "index_service_todos_on_cars_todo_list_id"
 
   create_table "services", force: :cascade do |t|
     t.string   "name"

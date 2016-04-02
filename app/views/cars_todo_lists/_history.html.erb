@@ -1,0 +1,42 @@
+<div class="well">
+
+<% if  current_user.admin? || current_user.technician? %>
+<h1 style="color: #888">Car Service History</h1>
+<%= render 'tableheader' %>
+  <%  @cars_todo_lists.each do |cars_todo_list| %>
+      <% if cars_todo_list.pickedup? %>
+          <tr>
+           
+            <td> <%= link_to cars_todo_list.id, cars_todo_list %> </td>
+            <td> <%= link_to cars_todo_list.car_plate_number, cars_todo_list %> </td>
+            
+            <td><font color="gray">Car has been Picked-up<span class="glyphicon glyphicon-ok-circle"> </span></font></td>
+             <td><%= cars_todo_list.created_at.strftime("%I:%M %p %B-%d-%Y") %> </td>
+     <% end %>
+     
+      </tr>
+  <% end %>
+  </div>
+<% else %>
+      <h1 style="color: #888">Car Service History</h1>
+      <%= render 'tableheader' %>
+        <%  @cars_todo_lists.each do |cars_todo_list| %>
+        <tr>
+            <% if current_user.email == cars_todo_list.car_owner_email %>
+                  <% if cars_todo_list.pickedup? %>
+                  
+                  <td> <%= link_to cars_todo_list.id, cars_todo_list %> </td>
+                  <td> <%= link_to cars_todo_list.car_plate_number, cars_todo_list %> </td>
+                                    <td> <%= cars_todo_list.owner_name %> </td>
+                  <td><font color="gray">Car has been Picked-up<span class="glyphicon glyphicon-ok-circle"> </span></font></td>
+                   <td><%= cars_todo_list.created_at.strftime("%I:%M %p %B-%d-%Y") %> </td>
+                  <% end %>
+          
+          <% end %>
+      </tr>
+  <% end %>
+<% end %>
+  </div>
+</table>
+  
+

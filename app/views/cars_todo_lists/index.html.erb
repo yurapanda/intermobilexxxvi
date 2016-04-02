@@ -1,0 +1,51 @@
+<div class="well">
+
+<% if  current_user.admin? || current_user.technician? %>
+<h1 style="color: #4D559A">Cars On Service </h1>
+<%= render 'tableheader' %>
+  <%  @cars_todo_lists.each do |cars_todo_list| %>
+    <% if !cars_todo_list.pickedup?%>
+      <tr>
+        
+        <td> <%= link_to cars_todo_list.id, cars_todo_list %> </td>
+        <td> <%= link_to cars_todo_list.car_plate_number, cars_todo_list %> </td>
+
+       
+          <% if cars_todo_list.ready_for_pickup? %>
+              <td><font color="green">Car is Ready for Pick-up<span class="glyphicon glyphicon-ok-circle"> </span></font></td>
+           <% else %>
+               <td><font color="#337AB7">Car Service On-Going<span class="glyphicon glyphicon-ok-circle"> </span></font></td>
+          <% end %>
+        <td><%= cars_todo_list.created_at.strftime("%I:%M %p %B-%d-%Y") %> </td>
+      </tr>
+      <% end %>
+     <% end %>
+    </div>
+
+<% else %>
+<h1 style="color: #4D559A">Cars On Service </h1>
+<%= render 'tableheader' %>
+         <%  @cars_todo_lists.each do |cars_todo_list| %>
+            <tr>
+              <% if current_user.email == cars_todo_list.car_owner_email %>
+              <% if !cars_todo_list.pickedup?%>
+              
+              <td> <%= link_to cars_todo_list.id, cars_todo_list %> </td>
+              <td> <%= link_to cars_todo_list.car_plate_number, cars_todo_list %> </td>
+             
+                <% if cars_todo_list.ready_for_pickup? %>
+                   <td><font color="green">Car is Ready for Pickup<span class="glyphicon glyphicon-ok-circle"> </span></font></td>
+                <% else %>
+                     <td><font color="#337AB7">Car Service On-Going<span class="glyphicon glyphicon-ok-circle"> </span></font></td>
+                <% end %>
+               <td><%= cars_todo_list.created_at.strftime("%I:%M %p %B-%d-%Y") %> </td>
+              <% end %>
+              <% end %>
+            </tr>
+        <% end %>
+<% end %>
+</table>
+</div>
+<%= render 'history' %>
+
+<%= @comments.to_json %>

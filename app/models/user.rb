@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
 
   has_many :cars
+  has_many :comments
+  has_many :cars_todo_list
 
 
   validates :first_name, 			presence: true, length: {minimum: 2, maximum: 20}

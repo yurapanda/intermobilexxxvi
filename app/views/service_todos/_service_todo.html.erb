@@ -1,0 +1,22 @@
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <b>Service:</b> <%= service_todo.content %><br>
+    <b>Price:</b> <%= service_todo.price  %><br>
+	
+
+
+	
+  </div>
+  <div class="panel-footer">
+
+<% if  current_user.admin? || current_user.technician %>
+	<% if @cars_todo_list.ready_for_pickup? %>
+
+	<% else %>
+	<%= link_to "Delete Service", cars_todo_list_service_todo_path(@cars_todo_list, service_todo.id), method: :delete, data: { confirm: "Are you sure yo want to DELETE service?"},class: "btn btn-danger" %>
+	<%end %>
+<% end %>
+  </div>
+</div>

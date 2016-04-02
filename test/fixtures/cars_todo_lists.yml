@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car_plate_number: MyString
+  car_owner_email: MyString
+  pickedup_at: 2016-04-02 12:56:49
+  ready_for_pick_up_at: 2016-04-02 12:56:49
+
+two:
+  car_plate_number: MyString
+  car_owner_email: MyString
+  pickedup_at: 2016-04-02 12:56:49
+  ready_for_pick_up_at: 2016-04-02 12:56:49

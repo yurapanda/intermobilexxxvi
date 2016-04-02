@@ -1,0 +1,8 @@
+<% if current_user.admin? || current_user.technician? %>
+	<h1>New Car To Service</h1>
+
+	<%= render 'form' %>
+
+	
+	
+<% end %>
